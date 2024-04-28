@@ -1,0 +1,14 @@
+logging:
+  level:
+    web: INFO
+    org:
+      springframework:
+        security:
+          web: INFO
+spring:
+  application:
+    name: rewards_backend_api
+  config:
+    import: aws-secretsmanager:/rewards/prod/api-key
+  cache:
+    type: none
