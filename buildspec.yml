@@ -21,7 +21,6 @@ phases:
       - source .venv/bin/activate
       - pwd
       - ls -l
-      - pip cache dir
       - pip install -r requirements.txt
       - mkdir -p cicd_app_tests/invalid_config_folder_structures/with_folder_in_place_of_a_configuration_file/my_application/my_environment/misplaced_folder/
       - mkdir -p cicd_app_tests/invalid_config_folder_structures/without_a_configuration_file/my_application/my_environment/
@@ -30,3 +29,7 @@ phases:
       - touch cicd_app_tests/provided_input/.git/dummy_file.txt
       - mkdir build
       - python -m pytest cicd_app_tests
+
+cache:
+  paths:
+    - '/root/.cache/pip/**/*'
