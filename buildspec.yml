@@ -7,19 +7,20 @@ env:
 phases:
   install:
     runtime-versions:
-      java: corretto21
-      python: 3.x
-    # commands:
+      java: corretto21.x
+      # python: 3.x
+      nodejs: 20.x
+    commands:
     #   - ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
     #   - echo $TZ > /etc/timezone
-    #   - date
+      - npm install -g aws-cdk
 
   build:
     commands:
       - pwd
-      - date
-      - ls -lR
-      - ls -lR $CODEBUILD_SRC_DIR_Artifact_Checkout_Source_GitHub_CI_CD_Source
+      - env | grep CODEBUILD_SRC
+      # - ls -lR
+      # - ls -lR $CODEBUILD_SRC_DIR_Artifact_Checkout_Source_GitHub_CI_CD_Source
       - java -version
       - cdk --version
       # - git clone --depth 1 --branch feature/perf-test  https://github.com/leonjohan3/application-configuration-store-cicd.git
