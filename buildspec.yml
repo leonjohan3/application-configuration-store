@@ -6,30 +6,36 @@ env:
 
 phases:
   install:
-    commands:
-      - ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
-      - echo $TZ > /etc/timezone
-      - date
+    runtime-versions:
+      java: corretto21
+      python: 3.x
+    # commands:
+    #   - ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
+    #   - echo $TZ > /etc/timezone
+    #   - date
 
   build:
     commands:
       - pwd
-      - cd ..
-      - git clone --depth 1 --branch feature/perf-test  https://github.com/leonjohan3/application-configuration-store-cicd.git
-      - cd application-configuration-store-cicd/
-      - python -m venv .venv --clear --prompt venv --upgrade-deps
-      - source .venv/bin/activate
-      - pwd
-      - ls -l
-      - pip install -r requirements.txt
-      - mkdir -p cicd_app_tests/invalid_config_folder_structures/with_folder_in_place_of_a_configuration_file/my_application/my_environment/misplaced_folder/
-      - mkdir -p cicd_app_tests/invalid_config_folder_structures/without_a_configuration_file/my_application/my_environment/
-      - mkdir -p cicd_app_tests/invalid_config_folder_structures/without_any_environment_folders/my_application/
-      - mkdir -p cicd_app_tests/provided_input/.git
-      - touch cicd_app_tests/provided_input/.git/dummy_file.txt
-      - mkdir build
-      - python -m pytest cicd_app_tests
+      - ls -lR
+      - ls -lR $CODEBUILD_SRC_DIR_Artifact_Checkout_Source_GitHub_CI_CD_Source
+      - java -version
+      - cdk --version
+      # - git clone --depth 1 --branch feature/perf-test  https://github.com/leonjohan3/application-configuration-store-cicd.git
+      # - cd application-configuration-store-cicd/
+      # - python -m venv .venv --clear --prompt venv --upgrade-deps
+      # - source .venv/bin/activate
+      # - pwd
+      # - ls -l
+      # - pip install -r requirements.txt
+      # - mkdir -p cicd_app_tests/invalid_config_folder_structures/with_folder_in_place_of_a_configuration_file/my_application/my_environment/misplaced_folder/
+      # - mkdir -p cicd_app_tests/invalid_config_folder_structures/without_a_configuration_file/my_application/my_environment/
+      # - mkdir -p cicd_app_tests/invalid_config_folder_structures/without_any_environment_folders/my_application/
+      # - mkdir -p cicd_app_tests/provided_input/.git
+      # - touch cicd_app_tests/provided_input/.git/dummy_file.txt
+      # - mkdir build
+      # - python -m pytest cicd_app_tests
 
-cache:
-  paths:
-    - '/root/.cache/pip/**/*'
+# cache:
+#   paths:
+#     - '/root/.cache/pip/**/*'
