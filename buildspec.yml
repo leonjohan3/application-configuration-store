@@ -11,12 +11,12 @@ phases:
     runtime-versions:
       java: corretto21.x
       # python: 3.x
-      # nodejs: 20.x
+      nodejs: 20.x
     commands:
       - ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
       - echo $TZ > /etc/timezone
       - date
-      # - npm install -g aws-cdk
+      - npm install -g aws-cdk
 
   build:
     commands:
@@ -36,14 +36,15 @@ phases:
       # - env | grep JRE
       # - java -version
       # - ./gradlew --version
-      - ls -lAR src/test/resources/invalid_config_folder_structures/
-      - ./gradlew check
+      # - ls -lAR src/test/resources/invalid_config_folder_structures/
+      # - ./gradlew check
       # - ./gradlew clean build || cat build/reports/tests/test/index.html
-      - du -hs /root/.gradle
-      - du -hs /root/.gradle/caches
-      - du -hs /root/.gradle/wrapper
+      # - du -hs /root/.gradle/*/
+      - cdk --no-color --ci diff
+      # - du -hs /root/.gradle/*/
+      # - du -hs /root/.gradle/caches
+      # - du -hs /root/.gradle/wrapper
       # - du -hs /root/.m2
-      # - cdk --no-color --ci diff
       # - pwd
       # - env | grep CODEBUILD_SRC
       # - ls -lR
