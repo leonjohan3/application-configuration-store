@@ -3,6 +3,8 @@ version: 0.2
 env:
   variables:
     SAM_CLI_TELEMETRY: 0
+    TZ: Australia/Sydney
+    APP_CONFIG_GROUP_PREFIX: bla
 
 phases:
   install:
@@ -11,18 +13,21 @@ phases:
       # python: 3.x
       nodejs: 20.x
     commands:
-    #   - ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
-    #   - echo $TZ > /etc/timezone
+      - ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
+      - echo $TZ > /etc/timezone
       - npm install -g aws-cdk
 
   build:
     commands:
-      - pwd
-      - env | grep CODEBUILD_SRC
+      - export APP_CONFIG_ROOT_CONFIG_FOLDER=$CODEBUILD_SRC
+      - cd $CODEBUILD_SRC_DIR_Artifact_Checkout_Source_GitHub_CI_CD_Source
+      - cdk --no-color --ci diff
+      # - pwd
+      # - env | grep CODEBUILD_SRC
       # - ls -lR
       # - ls -lR $CODEBUILD_SRC_DIR_Artifact_Checkout_Source_GitHub_CI_CD_Source
-      - java -version
-      - cdk --version
+      # - java -version
+      # - cdk --version
       # - git clone --depth 1 --branch feature/perf-test  https://github.com/leonjohan3/application-configuration-store-cicd.git
       # - cd application-configuration-store-cicd/
       # - python -m venv .venv --clear --prompt venv --upgrade-deps
