@@ -21,6 +21,7 @@ phases:
   build:
     commands:
       - date
+      - ps -ef
       - echo $HOME
       - mkdir -p $HOME/.gradle
       - echo 'org.gradle.console=plain' > $HOME/.gradle/gradle.properties
@@ -30,6 +31,10 @@ phases:
       - pwd
       - ls -lA
       - ./gradlew clean build
+      - du -hs /root/.gradle
+      - du -hs /root/.gradle/caches
+      - du -hs /root/.gradle/wrapper
+      - du -hs /root/.m2
       # - cdk --no-color --ci diff
       # - pwd
       # - env | grep CODEBUILD_SRC
