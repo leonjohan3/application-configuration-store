@@ -40,7 +40,7 @@ phases:
       # - ./gradlew check
       # - ./gradlew clean build || cat build/reports/tests/test/index.html
       # - du -hs /root/.gradle/*/
-      - cdk --no-color --ci diff
+      - cdk --no-color --ci --require-approval=never --verbose diff
       # - du -hs /root/.gradle/*/
       # - du -hs /root/.gradle/caches
       # - du -hs /root/.gradle/wrapper
