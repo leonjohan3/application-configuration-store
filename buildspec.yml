@@ -15,13 +15,22 @@ phases:
     commands:
       - ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
       - echo $TZ > /etc/timezone
+      - date
       - npm install -g aws-cdk
 
   build:
     commands:
+      - date
+      - echo $HOME
+      - mkdir -p $HOME/.gradle
+      - echo 'org.gradle.console=plain' > $HOME/.gradle/gradle.properties
+      - echo 'GRADLE_WRAPPER_DISTS_HOME=GRADLE_USER_HOME' >> $HOME/.gradle/gradle.properties
       - export APP_CONFIG_ROOT_CONFIG_FOLDER=$CODEBUILD_SRC
       - cd $CODEBUILD_SRC_DIR_Artifact_Checkout_Source_GitHub_CI_CD_Source
-      - cdk --no-color --ci diff
+      - pwd
+      - ls -lA
+      - ./gradlew clean build
+      # - cdk --no-color --ci diff
       # - pwd
       # - env | grep CODEBUILD_SRC
       # - ls -lR
@@ -43,6 +52,8 @@ phases:
       # - mkdir build
       # - python -m pytest cicd_app_tests
 
-# cache:
-#   paths:
+ cache:
+   paths:
+     - '/root/.gradle/caches/**/*'
+     - '/root/.gradle/wrapper/**/*'
 #     - '/root/.cache/pip/**/*'
