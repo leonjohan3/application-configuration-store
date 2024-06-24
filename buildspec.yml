@@ -52,8 +52,9 @@ phases:
       # - mkdir build
       # - python -m pytest cicd_app_tests
 
- cache:
-   paths:
-     - '/root/.gradle/caches/**/*'
-     - '/root/.gradle/wrapper/**/*'
-#     - '/root/.cache/pip/**/*'
+cache:
+  paths:
+    - '/root/.gradle/caches/**/*'
+    - '/root/.gradle/wrapper/**/*'
+    - '/root/.m2/**/*'
+#    - '/root/.cache/pip/**/*'
