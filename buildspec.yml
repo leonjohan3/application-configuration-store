@@ -40,7 +40,7 @@ phases:
       # - ./gradlew check
       # - ./gradlew clean build || cat build/reports/tests/test/index.html
       # - du -hs /root/.gradle/*/
-      - cdk --no-color --ci diff
+      - APP_CONFIG_ROOT_CONFIG_FOLDER=$CODEBUILD_SRC cdk --no-color --ci diff
       # - du -hs /root/.gradle/*/
       # - du -hs /root/.gradle/caches
       # - du -hs /root/.gradle/wrapper
@@ -68,7 +68,9 @@ phases:
 
 cache:
   paths:
-    - '/root/.gradle/caches/**/*'
-    - '/root/.gradle/wrapper/**/*'
+    - '/root/.gradle/**/*'
+    # - '/root/.gradle/caches/**/*'
+    # - '/root/.gradle/wrapper/**/*'
+    - '/root/.npm/**/*'
     # - '/root/.m2/**/*'
 #    - '/root/.cache/pip/**/*'
