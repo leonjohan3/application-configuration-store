@@ -21,25 +21,28 @@ phases:
   build:
     commands:
       - date
-      - ps -ef
-      - echo $HOME
+      # - ps -ef
+      # - echo $HOME
       - mkdir -p $HOME/.gradle
       - echo 'org.gradle.console=plain' > $HOME/.gradle/gradle.properties
-      - echo 'GRADLE_WRAPPER_DISTS_HOME=GRADLE_USER_HOME' >> $HOME/.gradle/gradle.properties
+      - echo 'org.gradle.daemon=false' >> $HOME/.gradle/gradle.properties
+      # - echo 'GRADLE_WRAPPER_DISTS_HOME=GRADLE_USER_HOME' >> $HOME/.gradle/gradle.properties
       - export APP_CONFIG_ROOT_CONFIG_FOLDER=$CODEBUILD_SRC
       - cd $CODEBUILD_SRC_DIR_Artifact_Checkout_Source_GitHub_CI_CD_Source
-      - pwd
-      - cat /codebuild/output/tmp/script.sh
+      # - pwd
+      # - cat /codebuild/output/tmp/script.sh
       # - env | grep JAVA
       # - env | grep JDK
       # - env | grep JRE
-      - java -version
-      - ./gradlew --version
-      - ./gradlew clean build || cat build/reports/tests/test/index.html
+      # - java -version
+      # - ./gradlew --version
+      - ls -lAR src/test/resources/invalid_config_folder_structures/
+      - ./gradlew check
+      # - ./gradlew clean build || cat build/reports/tests/test/index.html
       - du -hs /root/.gradle
       - du -hs /root/.gradle/caches
       - du -hs /root/.gradle/wrapper
-      - du -hs /root/.m2
+      # - du -hs /root/.m2
       # - cdk --no-color --ci diff
       # - pwd
       # - env | grep CODEBUILD_SRC
@@ -66,5 +69,5 @@ cache:
   paths:
     - '/root/.gradle/caches/**/*'
     - '/root/.gradle/wrapper/**/*'
-    - '/root/.m2/**/*'
+    # - '/root/.m2/**/*'
 #    - '/root/.cache/pip/**/*'
