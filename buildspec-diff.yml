@@ -42,11 +42,12 @@ phases:
       # - du -hs /root/.gradle/*/
       # - cdk --no-color --ci --require-approval=never --verbose bootstrap
       # - cdk --no-color --ci --require-approval=never --verbose diff
-      - cdk --no-color --ci --require-approval=never diff
-      - cd build/distributions
-      - tar -xf application-configuration-store-cicd.tar
-      - cd $CODEBUILD_SRC_DIR_Artifact_Checkout_Source_GitHub_CI_CD_Source
-      - java -Dapp.config.root.config.folder=$APP_CONFIG_ROOT_CONFIG_FOLDER -Dapp.config.group.prefix=$APP_CONFIG_GROUP_PREFIX -cp "build/distributions/application-configuration-store-cicd/lib/*" com.myorg.DiffConfigProfile
+      # - cdk --no-color --ci --require-approval=never diff
+      # - cd build/distributions
+      # - tar -xf application-configuration-store-cicd.tar
+      # - cd $CODEBUILD_SRC_DIR_Artifact_Checkout_Source_GitHub_CI_CD_Source
+      # - java -Dapp.config.root.config.folder=$APP_CONFIG_ROOT_CONFIG_FOLDER -Dapp.config.group.prefix=$APP_CONFIG_GROUP_PREFIX -cp "build/distributions/application-configuration-store-cicd/lib/*" com.myorg.DiffConfigProfile
+      # - ./gradlew clean
       # - du -hs /root/.gradle/*/
       # - du -hs /root/.gradle/caches
       # - du -hs /root/.gradle/wrapper
@@ -72,6 +73,11 @@ phases:
       # - mkdir build
       # - python -m pytest cicd_app_tests
 
+artifacts:
+  files:
+    - '**.*'
+  name: application-configuration-store_$APP_CONFIG_GROUP_PREFIX
+        
 cache:
   paths:
     - '/root/.gradle/**/*'
