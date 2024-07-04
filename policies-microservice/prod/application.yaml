@@ -19,7 +19,7 @@ spring:
       use-key-prefix: false
       
   config:
-    import: aws-secretsmanager:/integration/prod/salesforce/privatekey
+    import: aws-secretsmanager:/integration/prod/salesforce-privatekey
     
   data:
     redis:
@@ -35,4 +35,4 @@ spring:
 app:
   salesforce:
     private:
-      key: ${/integration/prod/salesforce/privatekey}
+      key: ${salesforce-privatekey}
