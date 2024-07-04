@@ -1,5 +1,5 @@
 # Overview
-This GutHub repo contains an example of the externalized configurations for the Spring Boot microservices/applications of the organization/team.
+This GitHub repo contains an example of the externalized configurations for the Spring Boot microservices/applications of the organization/team.
 When these configurations change, they are automatically deployed to AWS AppConfig (using CI/CD or GitOps). Re-started microservices/applications then pick up the new configuration.
 
 Changes to configuration is managed using normal code review practices, and can be rolled back using version-controlling. Visibility to changes mean the ability to trace and reproduce issues (caused by configuration changes) quickly.
