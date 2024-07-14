@@ -8,4 +8,4 @@ spring:
 
   kafka:
     security:
-      protocol: SASL_SSL
+      protocol: SASL_SSLL
